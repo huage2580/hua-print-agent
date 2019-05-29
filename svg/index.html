@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/svg.select.css" />
+		<script src="js/svg.js"></script>
+		<script src="js/svg.resize.js"></script>
+		<script src="js/svg.draggable.js"></script>
+		<script src="js/svg.select.js"></script>
+		<!-- <script src="node_modules/@svgdotjs/svg.draggable.js/dist/svg.draggable.js"></script> -->
+		<meta charset="utf-8" />
+		<title>SVG测试</title>
+	</head>
+	<body>
+		<button onclick="printMsg()">打印</button>
+		<div id="drawing"></div>
+		<script type="text/javascript">
+			var draw = SVG('drawing').size(210, 297)
+			var rect2 = draw.rect(210, 297).attr({
+				fill: '#cccccc'
+			})
+			var rect = draw.rect(60, 60).attr({
+				fill: '#f06'
+			})
+			rect.draggable();
+			rect.on('dblclick', function() {
+				var opt = {
+					constraint: {
+						minX: 0,
+						minY: 0,
+						maxX: 210,
+						maxY: 210
+					},
+					saveAspectRatio: 1.0
+				};
+				rect.selectize().resize(opt);
+			});
+			var text = draw.text("HELLO")
+			text.size(64)
+			text.draggable();
+		</script>
+		<script type="text/javascript">
+			websocket = new WebSocket('ws://127.0.0.1:9401');
+			websocket.onopen = function(evnt) {
+				console.log("服务器连接成功");
+			};
+			websocket.onmessage = function(evnt) {
+				console.log("接收到信息", evnt)
+			};
+
+			websocket.onerror = function(evnt) {
+				console.log("websocket异常", evnt);
+			};
+			websocket.onclose = function(evnt) {
+				console.log("与服务器断开");
+			}
+
+			function printMsg() {
+				console.log(text.x())
+				var pringOrder = {
+					"id": 1537148688,
+					"page": {
+						"width": 210,
+						"height": 297
+					},
+					"content": [{
+						"type": "text",
+						"text": "HELLO",
+						"size": text.font()["font-size"],
+						"x": text.x(),
+						"y": text.y()
+					}, {
+						"type": "line",
+						"x1": 0,
+						"y1": 0,
+						"x2": 210,
+						"y2": 297
+					}, {
+						"type": "barcode",
+						"text": "12345678",
+						"width": rect.width(),
+						"height": rect.height(),
+						"x": rect.x(),
+						"y": rect.y()
+					}]
+				};
+				websocket.send(JSON.stringify(pringOrder));
+			}
+		</script>
+	</body>
+
+</html>
