@@ -1,14 +1,15 @@
 # web打印代理
 ## 简介
-一款静默打印代理工具，通过建立Socket服务，接收打印指令，通过解析打印指令完成打印。
+一款静默打印代理工具，通过建立Socket服务，接收打印指令，通过解析打印指令完成打印。  
+A silent print proxy tool that receives print commands by creating a Socket service and prints by parsing print instructions.
 ## 使用方式
 1. 下载源码或者release版
 2. 运行.exe文件
 3. 打开测试页 `index.html`
 4. 点击测试页的打印按钮
 ## 可视化编辑的demo
-运行svg项目的index.html 矩形框表示条码区域，双击矩形框可以编辑大小，文字和矩形框可拖动；运行代理后点击打印即可
-
+运行svg项目的index.html ,矩形框表示条码区域，双击矩形框可以编辑大小，文字和矩形框可拖动；运行代理后点击打印即可;  
+Run the index.html of the svg project. The rectangle box indicates the barcode area. Double-click the rectangle to edit the size. The text and rectangle can be dragged. After running the proxy, click Print.
 ### 系统功能
 * 最小化到状态栏
 * 单实例
@@ -18,8 +19,8 @@
 * 打印结果反馈
 
 ### 打印功能
-* 自定义纸张大小
-* 打印条形码，二维码
+* 自定义纸张大小;Custom paper size
+* 打印条形码，二维码;Print barcode, QR code;
 * 打印图片
 
 ## 指令示例
